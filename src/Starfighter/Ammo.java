@@ -3,55 +3,70 @@ package Starfighter;
 //(c) A+ Computer Science
 //www.apluscompsci.com
 //Name -
-
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
 import javax.imageio.ImageIO;
 
-public class Ammo extends MovingThing
-{
-	private int speed;
+public class Ammo extends MovingThing {
 
-	public Ammo()
-	{
-		this(0,0,0);
-	}
+    private int speed;
 
-	public Ammo(int x, int y)
-	{
-		//add code
-	}
+    public Ammo() {
+        this(0, 0, 0);
+    }
 
-	public Ammo(int x, int y, int s)
-	{
-		//add code
-	}
+    public Ammo(int x, int y) {
+        this(x, y, 0);
+    }
 
-	public void setSpeed(int s)
-	{
-	   //add code
-	}
+    public Ammo(int x, int y, int s) {
+        super(x, y);
+        speed = s;
+    }
 
-	public int getSpeed()
-	{
-	   return 0;
-	}
+    public void setSpeed(int s) {
+        speed = s;
+    }
 
-	public void draw( Graphics window )
-	{
-		//add code to draw the ammo
-	}
-	
-	
-	public void move( String direction )
-	{
-		//add code to draw the ammo
-	}
+    public int getSpeed() {
+        return speed;
+    }
 
-	public String toString()
-	{
-		return "";
-	}
+    public void move(String dir) {
+        switch (dir) {
+            case "LEFT":
+                setX(getX() - speed);
+                break;
+            case "RIGHT":
+                setX(getX() + speed);
+                break;
+            case "UP":
+                setY(getY() - speed);
+                break;
+            case "DOWN":
+                setY(getY() + speed);
+                break;
+        }
+    }
+
+    public boolean collide(MovingThing obj) {
+        return (getY() + getHeight() >= obj.getY() &&
+                getY() <= obj.getY() + obj.getHeight() &&
+                getX() + getWidth() > obj.getX() && 
+                getX() <= obj.getX() + obj.getWidth()); 
+                
+            
+        
+    }
+
+    public void draw(Graphics window) {
+        window.setColor(Color.YELLOW);
+        window.fillRect(getX(), getY(), getWidth(), getHeight());
+    }
+
+    public String toString() {
+        return "";
+    }
 }
