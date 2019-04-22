@@ -3,30 +3,28 @@ package Starfighter;
 //(c) A+ Computer Science
 //www.apluscompsci.com
 //Name -
-
 import javax.swing.JFrame;
 import java.awt.Component;
 
-public class StarFighter extends JFrame
-{
-	private static final int WIDTH = 800;
-	private static final int HEIGHT = 600;
+public class StarFighter extends JFrame {
 
-	public StarFighter()
-	{
-		super("STARFIGHTER");
-		setSize(WIDTH,HEIGHT);
+    private static final int WIDTH = 800;
+    private static final int HEIGHT = 600;
 
-		OuterSpace theGame = new OuterSpace();
-		((Component)theGame).setFocusable(true);
+    public StarFighter() {
+        super("STARFIGHTER");
+        setSize(WIDTH, HEIGHT);
 
-		getContentPane().add(theGame);
+        OuterSpace theGame = new OuterSpace();
+        ((Component) theGame).setFocusable(true);
 
-		setVisible(true);
-	}
+        getContentPane().add(theGame);
 
-	public static void main( String args[] )
-	{
-		StarFighter run = new StarFighter();
-	}
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
+    }
+
+    public static void main(String args[]) {
+        StarFighter run = new StarFighter();
+    }
 }
