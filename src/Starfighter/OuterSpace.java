@@ -36,7 +36,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
 
 		//instantiate other instance variables
         //Ship, Alien
-        ship = new Ship();
+        ship = new Ship(375, 500, 50, 50, 2);
 
         this.addKeyListener(this);
         new Thread(this).start();
@@ -84,22 +84,22 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
 
 
 		//add code to move Ship, Alien, etc.
-        ship.draw(window);
+        ship.draw(graphToBack);
 		//add in collision detection to see if Bullets hit the Aliens and if Bullets hit the Ship
         twoDGraph.drawImage(back, null, 0, 0);
     }
 
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+        if (e.getKeyCode() == KeyEvent.VK_A) {
             keys[0] = true;
         }
-        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+        if (e.getKeyCode() == KeyEvent.VK_D) {
             keys[1] = true;
         }
-        if (e.getKeyCode() == KeyEvent.VK_UP) {
+        if (e.getKeyCode() == KeyEvent.VK_W) {
             keys[2] = true;
         }
-        if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+        if (e.getKeyCode() == KeyEvent.VK_S) {
             keys[3] = true;
         }
         if (e.getKeyCode() == KeyEvent.VK_SPACE) {
@@ -109,16 +109,16 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
     }
 
     public void keyReleased(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+        if (e.getKeyCode() == KeyEvent.VK_A) {
             keys[0] = false;
         }
-        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+        if (e.getKeyCode() == KeyEvent.VK_D) {
             keys[1] = false;
         }
-        if (e.getKeyCode() == KeyEvent.VK_UP) {
+        if (e.getKeyCode() == KeyEvent.VK_W) {
             keys[2] = false;
         }
-        if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+        if (e.getKeyCode() == KeyEvent.VK_S) {
             keys[3] = false;
         }
         if (e.getKeyCode() == KeyEvent.VK_SPACE) {
