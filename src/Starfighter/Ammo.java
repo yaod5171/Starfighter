@@ -52,13 +52,10 @@ public class Ammo extends MovingThing {
     }
 
     public boolean collide(MovingThing obj) {
-        return (getY() + getHeight() >= obj.getY() &&
-                getY() <= obj.getY() + obj.getHeight() &&
-                getX() + getWidth() > obj.getX() && 
-                getX() <= obj.getX() + obj.getWidth()); 
-                
-            
-        
+        return (getY() + getHeight() >= obj.getY()
+                && getY() <= obj.getY() + obj.getHeight()
+                && getX() + getWidth() > obj.getX()
+                && getX() <= obj.getX() + obj.getWidth());
     }
 
     public void draw(Graphics window) {
@@ -67,6 +64,6 @@ public class Ammo extends MovingThing {
     }
 
     public String toString() {
-        return "";
+        return super.toString() + " " + getSpeed();
     }
 }

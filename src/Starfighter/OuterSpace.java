@@ -20,7 +20,8 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
     private Ship ship;
     private Alien alienOne;
     private Alien alienTwo;
-
+    
+    private Ammo bullet;
     /* uncomment once you are ready for this part
      *
      private AlienHorde horde;
@@ -83,12 +84,23 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
         if (keys[3] == true) {
             ship.move("DOWN");
         }
+        
+        if (keys[4]) {
+            bullet = new Ammo(ship.getX() + ship.getWidth()/2, ship.getY(), 5);
+        }
+        
+        if (bullet != null) {
+            bullet.move("UP");
+        }
 
 
 		//add code to move Ship, Alien, etc.
         ship.draw(graphToBack);
         alienOne.draw(graphToBack);
         alienTwo.draw(graphToBack);
+        if (bullet != null) {
+            bullet.draw(graphToBack);
+        }
 		//add in collision detection to see if Bullets hit the Aliens and if Bullets hit the Ship
         twoDGraph.drawImage(back, null, 0, 0);
     }
