@@ -39,20 +39,20 @@ public class AlienHorde
                 a.move(a.getMovement());
                 if (a.getX() < 0) {
                     a.setMovement("RIGHT");
-                    a.setY(a.getY()+4);
+                    a.setY(a.getY()+25);
                 } else if (a.getX() + a.getWidth() > 800) {
                     a.setMovement("LEFT");
-                    a.setY(a.getY()+4);
+                    a.setY(a.getY()+25);
                 }
             }
 	}
 
 	public void removeDeadOnes(List<Ammo> shots)
 	{
-            for (Alien a: aliens) {
+            for (int i = 0; i < aliens.size(); i++) {
                 for (Ammo b: shots) {
-                    if (b.collide(a)) {
-                        aliens.remove(a);
+                    if (b.collide(aliens.get(i))) {
+                        aliens.remove(i);
                         b.setY(-200);
                         break;
                     }
