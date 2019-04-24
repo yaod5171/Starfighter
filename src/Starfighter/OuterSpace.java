@@ -30,6 +30,9 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
     private boolean[] keys;
     private BufferedImage back;
     private boolean createdBullet;
+    
+    private int shotCount;
+    
     public OuterSpace() {
         setBackground(Color.black);
 
@@ -45,6 +48,8 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
         shots = new Bullets();
         
         createdBullet = false;
+        shotCount = 0;
+        
         this.addKeyListener(this);
         new Thread(this).start();
 
@@ -69,11 +74,13 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
         //we will draw all changes on the background image
         Graphics graphToBack = back.createGraphics();
 
-        graphToBack.setColor(Color.BLUE);
-        graphToBack.drawString("StarFighter ", 25, 50);
         graphToBack.setColor(Color.BLACK);
         graphToBack.fillRect(0, 0, 800, 600);
-
+        /*
+        graphToBack.setColor(Color.BLUE);
+        graphToBack.drawString("StarFighter ", 25, 50);
+                */
+        
         if (keys[0] == true) {
             ship.move("LEFT");
         }
@@ -91,6 +98,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
 
         if (keys[4] && !createdBullet) {
             shots.add(new Ammo(ship.getX() + ship.getWidth() / 2, ship.getY(), 5));
+            shotCount++;
             createdBullet = true;
         }
 
@@ -108,6 +116,11 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
         shots.drawEmAll(graphToBack);
         //add in collision detection to see if Bullets hit the Aliens and if Bullets hit the Ship
         horde.removeDeadOnes(shots.getList());
+        
+        //draw counts
+        graphToBack.setColor(Color.YELLOW);
+        graphToBack.drawString("Shots fired: " + shotCount, 500, 520);
+        graphToBack.drawString("Aliens destroyed: " + horde.getKillCount(), 500, 500);
         
         twoDGraph.drawImage(back, null, 0, 0);
     }

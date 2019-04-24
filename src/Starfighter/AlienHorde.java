@@ -15,10 +15,13 @@ import java.util.List;
 public class AlienHorde
 {
 	private List<Alien> aliens;
+        
+        private int killCount;
 
 	public AlienHorde(int size)
 	{
             aliens = new ArrayList();
+            killCount = 0;
 	}
 
 	public void add(Alien al)
@@ -54,11 +57,16 @@ public class AlienHorde
                     if (b.collide(aliens.get(i))) {
                         aliens.remove(i);
                         b.setY(-200);
+                        killCount++;
                         break;
                     }
                 }
             }
 	}
+        
+        public int getKillCount() {
+            return killCount;
+        }
 
 	public String toString()
 	{
