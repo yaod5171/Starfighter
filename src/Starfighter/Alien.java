@@ -50,11 +50,11 @@ public class Alien extends MovingThing {
     public int getSpeed() {
         return speed;
     }
-    
+
     public void setMovement(String move) {
         movement = move;
     }
-    
+
     public String getMovement() {
         return movement;
     }
@@ -75,8 +75,6 @@ public class Alien extends MovingThing {
                 break;
         }
     }
-
-	
 
     public void draw(Graphics window) {
         window.drawImage(image, getX(), getY(), getWidth(), getHeight(), null);

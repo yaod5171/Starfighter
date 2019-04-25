@@ -70,7 +70,7 @@ public abstract class MovingThing implements Moveable {
     public int getHeight() {
         return height;
     }
-    
+
     public boolean collide(MovingThing obj) {
         return (getY() + getHeight() >= obj.getY()
                 && getY() <= obj.getY() + obj.getHeight()

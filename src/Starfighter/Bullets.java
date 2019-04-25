@@ -25,13 +25,13 @@ public class Bullets {
 
     //post - draw each Ammo
     public void drawEmAll(Graphics window) {
-        for (Ammo b: ammo) {
+        for (Ammo b : ammo) {
             b.draw(window);
         }
     }
 
     public void moveEmAll() {
-        for (Ammo b: ammo) {
+        for (Ammo b : ammo) {
             b.setY(b.getY() - b.getSpeed());
         }
     }

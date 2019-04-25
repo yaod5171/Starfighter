@@ -25,7 +25,7 @@ public class Ammo extends MovingThing {
         super(x, y);
         speed = s;
     }
-    
+
     public Ammo(int x, int y, int w, int h, int s) {
         super(x, y, w, h);
         speed = s;
