@@ -56,13 +56,6 @@ public class Ammo extends MovingThing {
         }
     }
 
-    public boolean collide(MovingThing obj) {
-        return (getY() + getHeight() >= obj.getY()
-                && getY() <= obj.getY() + obj.getHeight()
-                && getX() + getWidth() > obj.getX()
-                && getX() <= obj.getX() + obj.getWidth());
-    }
-
     public void draw(Graphics window) {
         window.setColor(Color.YELLOW);
         window.fillRect(getX(), getY(), getWidth(), getHeight());
