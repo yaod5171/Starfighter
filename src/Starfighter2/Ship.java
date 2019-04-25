@@ -12,7 +12,6 @@ import javax.imageio.ImageIO;
 
 public class Ship extends MovingThing {
 
-    private int speed;
     private Image image;
 
     public Ship() {
@@ -28,8 +27,7 @@ public class Ship extends MovingThing {
     }
 
     public Ship(int x, int y, int w, int h, int s) {
-        super(x, y, w, h);
-        speed = s;
+        super(x, y, w, h, s);
         try {
             URL url = getClass().getResource("images/ship.jpg");
             System.out.println(url);
@@ -40,27 +38,20 @@ public class Ship extends MovingThing {
         }
     }
 
-    public void setSpeed(int s) {
-        speed = s;
-    }
-
-    public int getSpeed() {
-        return speed;
-    }
 
     public void move(String dir) {
         switch (dir) {
             case "LEFT":
-                setX(getX() - speed);
+                setX(getX() - getSpeed());
                 break;
             case "RIGHT":
-                setX(getX() + speed);
+                setX(getX() + getSpeed());
                 break;
             case "UP":
-                setY(getY() - speed);
+                setY(getY() - getSpeed());
                 break;
             case "DOWN":
-                setY(getY() + speed);
+                setY(getY() + getSpeed());
                 break;
         }
     }

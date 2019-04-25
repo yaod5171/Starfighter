@@ -12,26 +12,30 @@ public abstract class MovingThing implements Moveable {
     private int yPos;
     private int width;
     private int height;
+    private int speed;
 
     public MovingThing() {
-        xPos = 10;
-        yPos = 10;
-        width = 10;
-        height = 10;
+        this(10, 10, 10, 10, 2);
     }
 
     public MovingThing(int x, int y) {
-        xPos = x;
-        yPos = y;
-        width = 10;
-        height = 10;
+        this(x, y, 10, 10, 2);
+    }
+
+    public MovingThing(int x, int y, int s) {
+        this(x, y, 10, 10, s);
     }
 
     public MovingThing(int x, int y, int w, int h) {
+        this(x, y, w, h, 2);
+    }
+
+    public MovingThing(int x, int y, int w, int h, int s) {
         xPos = x;
         yPos = y;
         width = w;
         height = h;
+        speed = s;
     }
 
     public void setPos(int x, int y) {
@@ -47,12 +51,20 @@ public abstract class MovingThing implements Moveable {
         yPos = y;
     }
 
+    public void setSpeed(int s) {
+        speed = s;
+    }
+
     public int getX() {
         return xPos;
     }
 
     public int getY() {
         return yPos;
+    }
+
+    public int getSpeed() {
+        return speed;
     }
 
     public void setWidth(int w) {

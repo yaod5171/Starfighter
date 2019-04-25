@@ -13,7 +13,6 @@ import javax.imageio.ImageIO;
 
 public class Alien extends MovingThing {
 
-    private int speed;
     private Image image;
     private String movement;
 
@@ -33,9 +32,8 @@ public class Alien extends MovingThing {
     }
 
     public Alien(int x, int y, int w, int h, int s) {
-        super(x, y, w, h);
+        super(x, y, w, h, s);
         this.movement = "LEFT";
-        speed = s;
         try {
             URL url = getClass().getResource("images/alien.jpg");
             image = ImageIO.read(url);
@@ -44,13 +42,6 @@ public class Alien extends MovingThing {
         }
     }
 
-    public void setSpeed(int s) {
-        speed = s;
-    }
-
-    public int getSpeed() {
-        return speed;
-    }
 
     public void setMovement(String move) {
         movement = move;
@@ -63,16 +54,16 @@ public class Alien extends MovingThing {
     public void move(String dir) {
         switch (dir) {
             case "LEFT":
-                setX(getX() - speed);
+                setX(getX() - getSpeed());
                 break;
             case "RIGHT":
-                setX(getX() + speed);
+                setX(getX() + getSpeed());
                 break;
             case "UP":
-                setY(getY() - speed);
+                setY(getY() - getSpeed());
                 break;
             case "DOWN":
-                setY(getY() + speed);
+                setY(getY() + getSpeed());
                 break;
         }
     }
