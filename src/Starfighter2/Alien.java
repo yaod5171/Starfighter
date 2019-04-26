@@ -51,23 +51,6 @@ public class Alien extends MovingThing {
         return movement;
     }
 
-    public void move(String dir) {
-        switch (dir) {
-            case "LEFT":
-                setX(getX() - getSpeed());
-                break;
-            case "RIGHT":
-                setX(getX() + getSpeed());
-                break;
-            case "UP":
-                setY(getY() - getSpeed());
-                break;
-            case "DOWN":
-                setY(getY() + getSpeed());
-                break;
-        }
-    }
-
     public void draw(Graphics window) {
         window.drawImage(image, getX(), getY(), getWidth(), getHeight(), null);
     }

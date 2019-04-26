@@ -28,23 +28,6 @@ public class Ammo extends MovingThing {
         super(x, y, w, h, s);
     }
 
-    public void move(String dir) {
-        switch (dir) {
-            case "LEFT":
-                setX(getX() - getSpeed());
-                break;
-            case "RIGHT":
-                setX(getX() + getSpeed());
-                break;
-            case "UP":
-                setY(getY() - getSpeed());
-                break;
-            case "DOWN":
-                setY(getY() + getSpeed());
-                break;
-        }
-    }
-
     public void draw(Graphics window) {
         window.setColor(Color.YELLOW);
         window.fillRect(getX(), getY(), getWidth(), getHeight());

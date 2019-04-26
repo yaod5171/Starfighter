@@ -90,7 +90,22 @@ public abstract class MovingThing implements Moveable {
                 && getX() <= obj.getX() + obj.getWidth());
     }
 
-    public abstract void move(String direction);
+    public void move(String direction) {
+        switch (direction) {
+            case "LEFT":
+                setX(getX() - getSpeed());
+                break;
+            case "RIGHT":
+                setX(getX() + getSpeed());
+                break;
+            case "UP":
+                setY(getY() - getSpeed());
+                break;
+            case "DOWN":
+                setY(getY() + getSpeed());
+                break;
+        }
+    }
 
     public abstract void draw(Graphics window);
 
