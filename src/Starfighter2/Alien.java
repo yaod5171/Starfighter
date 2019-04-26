@@ -44,6 +44,10 @@ public class Alien extends MovingThing {
     }
     
     public Alien(int x, int y, int w, int h, int s, int vy) {
+        this(x, y, w, h, (double)s, vy);
+    }
+    
+    public Alien(int x, int y, int w, int h, double s, int vy) {
         super(x, y, w, h, s);
         down = vy;
         this.movement = "LEFT";

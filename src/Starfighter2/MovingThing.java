@@ -10,9 +10,11 @@ public abstract class MovingThing implements Moveable {
 
     private int xPos;
     private int yPos;
+    private double dx;
+    private double dy;
     private int width;
     private int height;
-    private int speed;
+    private double speed;
 
     public MovingThing() {
         this(10, 10, 10, 10, 2);
@@ -25,6 +27,10 @@ public abstract class MovingThing implements Moveable {
     public MovingThing(int x, int y, int s) {
         this(x, y, 10, 10, s);
     }
+    
+    public MovingThing(int x, int y, double s) {
+        this(x, y, 10, 10, s);
+    }
 
     public MovingThing(int x, int y, int w, int h) {
         this(x, y, w, h, 2);
@@ -33,6 +39,18 @@ public abstract class MovingThing implements Moveable {
     public MovingThing(int x, int y, int w, int h, int s) {
         xPos = x;
         yPos = y;
+        dx = x;
+        dy = y;
+        width = w;
+        height = h;
+        speed = s;
+    }
+    
+    public MovingThing(int x, int y, int w, int h, double s) {
+        xPos = x;
+        yPos = y;
+        dx = x;
+        dy = y;
         width = w;
         height = h;
         speed = s;
@@ -43,11 +61,23 @@ public abstract class MovingThing implements Moveable {
         yPos = y;
     }
 
+    public void setX(double x) {
+        dx = x;
+        xPos = (int)dx;
+    }
+    
     public void setX(int x) {
+        dx = x;
         xPos = x;
     }
 
+    public void setY(double y) {
+        dy = y;
+        yPos = (int)dy;
+    }
+    
     public void setY(int y) {
+        dy = y;
         yPos = y;
     }
 
@@ -58,12 +88,24 @@ public abstract class MovingThing implements Moveable {
     public int getX() {
         return xPos;
     }
+    
+    public double getExactX() {
+        return dx;
+    }
 
     public int getY() {
         return yPos;
     }
+    
+    public double getExactY() {
+        return dy;
+    }
 
     public int getSpeed() {
+        return (int)speed;
+    }
+    
+    public double getExactSpeed() {
         return speed;
     }
 
@@ -93,16 +135,16 @@ public abstract class MovingThing implements Moveable {
     public void move(String direction) {
         switch (direction) {
             case "LEFT":
-                setX(getX() - getSpeed());
+                setX(getExactX() - getExactSpeed());
                 break;
             case "RIGHT":
-                setX(getX() + getSpeed());
+                setX(getExactX() + getExactSpeed());
                 break;
             case "UP":
-                setY(getY() - getSpeed());
+                setY(getExactY() - getExactSpeed());
                 break;
             case "DOWN":
-                setY(getY() + getSpeed());
+                setY(getExactY() + getExactSpeed());
                 break;
         }
     }
