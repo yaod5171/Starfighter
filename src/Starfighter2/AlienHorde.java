@@ -41,10 +41,10 @@ public class AlienHorde {
             a.move(a.getMovement());
             if (a.getX() < 0) {
                 a.setMovement("RIGHT");
-                a.setY(a.getY() + 25);
+                a.setY(a.getY() + a.getDown());
             } else if (a.getX() + a.getWidth() > 800) {
                 a.setMovement("LEFT");
-                a.setY(a.getY() + 25);
+                a.setY(a.getY() + a.getDown());
             }
         }
     }

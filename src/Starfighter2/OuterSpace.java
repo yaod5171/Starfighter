@@ -25,6 +25,9 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
     private Bullets shots;
     private List<PowerUp> powerups;
 
+    private int level;
+    private boolean hasPowerUp;
+    private String PowerUp;
     private boolean gameOver;
 
     private boolean[] keys;
@@ -32,30 +35,42 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
     private boolean createdBullet;
 
     private int shotCount;
+    
+    private final int TIMER = 500;
+    private int timer;
 
     public OuterSpace() {
         setBackground(Color.black);
 
         keys = new boolean[5];
         gameOver = false;
+        
+        level = 1;
 
         //instantiate other instance variables
         //Ship, Alien
         ship = new Ship(375, 500, 50, 50, 2);
-        horde = new AlienHorde(50);
-        for (int i = 0; i < 50; i++) {
-            horde.add(new Alien(50 * (i % 10), 50 * (i / 10), 1));
-        }
+        newHorde();
         shots = new Bullets();
         powerups = new ArrayList();
-
+        
+        
         createdBullet = false;
         shotCount = 0;
+        
+        timer = TIMER;
 
         this.addKeyListener(this);
         new Thread(this).start();
 
         setVisible(true);
+    }
+    
+    public void newHorde() {
+        horde = new AlienHorde(50);
+        for (int i = 0; i < 50; i++) {
+            horde.add(new Alien(50 * (i % 10), 50 * (i / 10), 30, 30, 1, level*10));
+        }
     }
 
     public void update(Graphics window) {
@@ -136,10 +151,36 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
         //get new powerups
         powerups.addAll(horde.getPowerups());
         
-        //draw all powerups
-        for (PowerUp pu: powerups) {
+        
+        for (int i = 0; i < powerups.size(); i++) {
+            PowerUp pu = powerups.get(i);
+            //draw all powerups
             pu.move("DOWN");
             pu.draw(graphToBack);
+            
+            //powerup collision detection
+            if (ship.collide(pu)) {
+                hasPowerUp = true; //add more later
+                PowerUp = "SHIELD";
+                
+                pu.setY(getHeight()+100);
+            }
+            
+            //clean up
+            if (pu.getY() + 50 > getHeight()) {
+                powerups.remove(i--);
+            }
+            
+        }
+        
+        //are all aliens defeated?
+        if (horde.getList().size() == 0) {
+            timer--;
+            if (timer == 0) {
+                level++;
+                newHorde();
+                timer = TIMER;
+            }
         }
 
         //draw counts

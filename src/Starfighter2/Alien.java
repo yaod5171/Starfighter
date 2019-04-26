@@ -15,6 +15,7 @@ public class Alien extends MovingThing {
 
     private Image image;
     private String movement;
+    private int down;
 
     public Alien() {
         this(0, 0, 30, 30, 0);
@@ -32,7 +33,19 @@ public class Alien extends MovingThing {
     }
 
     public Alien(int x, int y, int w, int h, int s) {
+        this(x, y, w, h, s, 20);
+        this.movement = "LEFT";
+        try {
+            URL url = getClass().getResource("images/alien.jpg");
+            image = ImageIO.read(url);
+        } catch (Exception e) {
+            System.out.println("alright who deleted the aliens");
+        }
+    }
+    
+    public Alien(int x, int y, int w, int h, int s, int vy) {
         super(x, y, w, h, s);
+        down = vy;
         this.movement = "LEFT";
         try {
             URL url = getClass().getResource("images/alien.jpg");
@@ -49,6 +62,14 @@ public class Alien extends MovingThing {
 
     public String getMovement() {
         return movement;
+    }
+    
+    public void setDown(int vy) {
+        down = vy;
+    }
+    
+    public int getDown() {
+        return down;
     }
 
     public void draw(Graphics window) {
