@@ -30,7 +30,6 @@ public class Ship extends MovingThing {
         super(x, y, w, h, s);
         try {
             URL url = getClass().getResource("images/ship.jpg");
-            System.out.println(url);
             image = ImageIO.read(url);
         } catch (Exception e) {
             //feel free to do something here

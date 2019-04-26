@@ -14,6 +14,7 @@ import static java.lang.Character.*;
 import java.awt.image.BufferedImage;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
 
 public class OuterSpace extends Canvas implements KeyListener, Runnable {
 
@@ -22,6 +23,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
      */
     private AlienHorde horde;
     private Bullets shots;
+    private List<PowerUp> powerups;
 
     private boolean gameOver;
 
@@ -45,6 +47,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
             horde.add(new Alien(50 * (i % 10), 50 * (i / 10), 1));
         }
         shots = new Bullets();
+        powerups = new ArrayList();
 
         createdBullet = false;
         shotCount = 0;
@@ -129,6 +132,15 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
         shots.drawEmAll(graphToBack);
         //add in collision detection to see if Bullets hit the Aliens and if Bullets hit the Ship
         horde.removeDeadOnes(shots.getList());
+        
+        //get new powerups
+        powerups.addAll(horde.getPowerups());
+        
+        //draw all powerups
+        for (PowerUp pu: powerups) {
+            pu.move("DOWN");
+            pu.draw(graphToBack);
+        }
 
         //draw counts
         graphToBack.setColor(Color.YELLOW);

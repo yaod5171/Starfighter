@@ -10,16 +10,20 @@ import java.io.File;
 import javax.imageio.ImageIO;
 import java.util.ArrayList;
 import java.util.List;
+import java.lang.Math;
 
 public class AlienHorde {
 
     private List<Alien> aliens;
 
     private int killCount;
+    
+    private List<PowerUp> pu;
 
     public AlienHorde(int size) {
         aliens = new ArrayList();
         killCount = 0;
+        pu = new ArrayList();
     }
 
     public void add(Alien al) {
@@ -49,14 +53,21 @@ public class AlienHorde {
         for (int i = 0; i < aliens.size(); i++) {
             for (Ammo b : shots) {
                 if (b.collide(aliens.get(i))) {
+                    if (Math.random() < 0.04) {
+                        //spawn a powerup
+                        pu.add(new PowerUp(b.getX(), b.getY()));
+                    }
                     aliens.remove(i);
                     b.setY(-200);
                     killCount++;
+                    
                     break;
                 }
             }
         }
     }
+    
+    
 
     public int getKillCount() {
         return killCount;
@@ -65,7 +76,12 @@ public class AlienHorde {
     public List<Alien> getList() {
         return aliens;
     }
-
+    
+    public List<PowerUp> getPowerups() {
+        List<PowerUp> out = pu;
+        pu = new ArrayList();
+        return out;
+    }
     public String toString() {
         return "";
     }

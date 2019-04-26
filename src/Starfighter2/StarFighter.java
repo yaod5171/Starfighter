@@ -12,7 +12,7 @@ public class StarFighter extends JFrame {
     private static final int HEIGHT = 600;
 
     public StarFighter() {
-        super("STARFIGHTER");
+        super("STARFIGHTER 2");
         setSize(WIDTH, HEIGHT);
 
         OuterSpace theGame = new OuterSpace();
