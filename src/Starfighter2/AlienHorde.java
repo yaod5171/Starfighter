@@ -29,6 +29,10 @@ public class AlienHorde {
     public void add(Alien al) {
         aliens.add(al);
     }
+    
+    public void remove(Alien al) {
+        aliens.remove(al);
+    }
 
     public void drawEmAll(Graphics window) {
         for (Alien a : aliens) {

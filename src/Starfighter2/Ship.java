@@ -12,7 +12,9 @@ import javax.imageio.ImageIO;
 
 public class Ship extends MovingThing {
 
-    private Image image;
+    private Image ship;
+    private Image puShip;
+    private boolean shield;
 
     public Ship() {
         this(10, 10, 10, 10, 5);
@@ -30,17 +32,29 @@ public class Ship extends MovingThing {
         super(x, y, w, h, s);
         try {
             URL url = getClass().getResource("images/ship.jpg");
-            image = ImageIO.read(url);
+            ship = ImageIO.read(url);
+            URL url2 = getClass().getResource("images/ship.jpgWithShield.jpg");
+            puShip = ImageIO.read(url2);
         } catch (Exception e) {
             //feel free to do something here
             System.out.println("This is an error");
         }
     }
 
+    public void getShield() {
+        shield = true;
+    }
 
+    public void loseShield() {
+        shield = false;
+    }
 
     public void draw(Graphics window) {
-        window.drawImage(image, getX(), getY(), getWidth(), getHeight(), null);
+        if (shield) {
+            window.drawImage(puShip, getX(), getY(), getWidth(), getHeight(), null);
+        } else {
+            window.drawImage(ship, getX(), getY(), getWidth(), getHeight(), null);
+        }
     }
 
     public String toString() {

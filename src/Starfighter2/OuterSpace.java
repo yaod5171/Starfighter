@@ -35,7 +35,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
     private boolean createdBullet;
 
     private int shotCount;
-    
+
     private final int TIMER = 500;
     private int timer;
 
@@ -44,7 +44,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
 
         keys = new boolean[5];
         gameOver = false;
-        
+
         level = 1;
 
         //instantiate other instance variables
@@ -53,11 +53,10 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
         newHorde();
         shots = new Bullets();
         powerups = new ArrayList();
-        
-        
+
         createdBullet = false;
         shotCount = 0;
-        
+
         timer = TIMER;
 
         this.addKeyListener(this);
@@ -65,11 +64,11 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
 
         setVisible(true);
     }
-    
+
     public void newHorde() {
         horde = new AlienHorde(50);
         for (int i = 0; i < 50; i++) {
-            horde.add(new Alien(50 * (i % 10), 50 * (i / 10), 30, 30, 1 + (double)(level * 0.2), level*10));
+            horde.add(new Alien(50 * (i % 10), 50 * (i / 10), 30, 30, 1 + (double) (level * 0.2), level * 10));
         }
     }
 
@@ -98,10 +97,18 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
          graphToBack.drawString("StarFighter ", 25, 50);
          */
 
-        for (Alien a : horde.getList()) {
-            //check if ship is dead
+        for (int i = 0; i < horde.getList().size(); i++) {
+            Alien a = horde.getList().get(i);
+            //check if ship has hit an alien
             if (ship.collide(a)) {
-                gameOver = true;
+                //does the shield save its life?
+                if (PowerUp.equals("SHIELD")) {
+                    horde.remove(a);
+                    ship.loseShield();
+                    PowerUp = "";
+                } else {
+                    gameOver = true;
+                }
             }
             //check if aliens have made it to the bottom
             if (a.getY() >= 500) {
@@ -147,32 +154,31 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
         shots.drawEmAll(graphToBack);
         //add in collision detection to see if Bullets hit the Aliens and if Bullets hit the Ship
         horde.removeDeadOnes(shots.getList());
-        
+
         //get new powerups
         powerups.addAll(horde.getPowerups());
-        
-        
+
         for (int i = 0; i < powerups.size(); i++) {
             PowerUp pu = powerups.get(i);
             //draw all powerups
             pu.move("DOWN");
             pu.draw(graphToBack);
-            
+
             //powerup collision detection
             if (ship.collide(pu)) {
                 hasPowerUp = true; //add more later
                 PowerUp = "SHIELD";
-                
-                pu.setY(getHeight()+100);
+                ship.getShield();
+                pu.setY(getHeight() + 100);
             }
-            
+
             //clean up
             if (pu.getY() + 50 > getHeight()) {
                 powerups.remove(i--);
             }
-            
+
         }
-        
+
         //are all aliens defeated?
         if (horde.getList().size() == 0) {
             timer--;
@@ -186,7 +192,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
         //draw counts
         graphToBack.setColor(Color.YELLOW);
         graphToBack.drawString("Shots fired: " + shotCount, 500, 520);
-        graphToBack.drawString("Aliens destroyed: " + ((level)*50 - horde.aliensLeft()), 500, 500);
+        graphToBack.drawString("Aliens destroyed: " + ((level) * 50 - horde.aliensLeft()), 500, 500);
 
         twoDGraph.drawImage(back, null, 0, 0);
     }
