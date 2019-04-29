@@ -26,8 +26,6 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
     private List<PowerUp> powerups;
 
     private int level;
-    private boolean hasPowerUp;
-    private String PowerUp;
     private boolean gameOver;
 
     private boolean[] keys;
@@ -102,10 +100,9 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
             //check if ship has hit an alien
             if (ship.collide(a)) {
                 //does the shield save its life?
-                if (PowerUp.equals("SHIELD")) {
+                if (PowerUp.powerup().equals("SHIELD")) {
                     horde.remove(a);
-                    ship.loseShield();
-                    PowerUp = "";
+                    PowerUp.losePU();
                 } else {
                     gameOver = true;
                 }
@@ -166,9 +163,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
 
             //powerup collision detection
             if (ship.collide(pu)) {
-                hasPowerUp = true; //add more later
-                PowerUp = "SHIELD";
-                ship.getShield();
+                PowerUp.getPU();
                 pu.setY(getHeight() + 100);
             }
 

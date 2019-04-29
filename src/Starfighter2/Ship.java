@@ -14,7 +14,6 @@ public class Ship extends MovingThing {
 
     private Image ship;
     private Image puShip;
-    private boolean shield;
 
     public Ship() {
         this(10, 10, 10, 10, 5);
@@ -41,16 +40,9 @@ public class Ship extends MovingThing {
         }
     }
 
-    public void getShield() {
-        shield = true;
-    }
-
-    public void loseShield() {
-        shield = false;
-    }
 
     public void draw(Graphics window) {
-        if (shield) {
+        if (PowerUp.powerup() == "SHIELD") {
             window.drawImage(puShip, getX(), getY(), getWidth(), getHeight(), null);
         } else {
             window.drawImage(ship, getX(), getY(), getWidth(), getHeight(), null);
