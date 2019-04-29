@@ -186,7 +186,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
         //draw counts
         graphToBack.setColor(Color.YELLOW);
         graphToBack.drawString("Shots fired: " + shotCount, 500, 520);
-        graphToBack.drawString("Aliens destroyed: " + horde.getKillCount(), 500, 500);
+        graphToBack.drawString("Aliens destroyed: " + ((level)*50 - horde.aliensLeft()), 500, 500);
 
         twoDGraph.drawImage(back, null, 0, 0);
     }

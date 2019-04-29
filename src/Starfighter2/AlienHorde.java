@@ -72,6 +72,10 @@ public class AlienHorde {
     public int getKillCount() {
         return killCount;
     }
+    
+    public int aliensLeft() {
+        return aliens.size();
+    }
 
     public List<Alien> getList() {
         return aliens;
