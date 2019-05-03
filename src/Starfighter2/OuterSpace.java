@@ -48,7 +48,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
         //instantiate other instance variables
         //Ship, Alien
         ship = new Ship(375, 500, 50, 50, 2);
-        newHorde();
+        startHorde();
         shots = new Bullets();
         powerups = new ArrayList();
 
@@ -63,10 +63,17 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
         setVisible(true);
     }
 
-    public void newHorde() {
+    public void startHorde() {
         horde = new AlienHorde(50);
         for (int i = 0; i < 50; i++) {
             horde.add(new Alien(50 * (i % 10), 50 * (i / 10), 30, 30, 1 + (double) (level * 0.2), level * 10));
+        }
+    }
+
+    public void newHorde() {
+        horde = new AlienHorde(50);
+        for (int i = 0; i < 50; i++) {
+            horde.add(new Alien(50 * (i % 10), 50 * (i / 10) - 200, 30, 30, 1 + (double) (level * 0.2), level * 10));
         }
     }
 
@@ -186,9 +193,15 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
 
         //draw counts
         graphToBack.setColor(Color.YELLOW);
-        graphToBack.drawString("Shots fired: " + shotCount, 500, 520);
         graphToBack.drawString("Aliens destroyed: " + ((level) * 50 - horde.aliensLeft()), 500, 500);
-
+        graphToBack.drawString("Shots fired: " + shotCount, 500, 520);
+        //draw level
+        graphToBack.drawString("Level " + level, 50, 520);
+        //draw label
+        graphToBack.setColor(Color.BLUE);
+        graphToBack.drawString("STARFIGHTER 2", 50, 500);
+        
+        
         twoDGraph.drawImage(back, null, 0, 0);
     }
 
