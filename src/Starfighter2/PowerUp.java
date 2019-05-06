@@ -19,11 +19,11 @@ public class PowerUp extends MovingThing {
     //static variables
     //general powerup variables
     private static List<String> PowerUps = new ArrayList();
-    private final static String[] POWERUPS = {"SHIELD"}; //add multishot, piercing, freeze?
+    private final static String[] POWERUPS = {"SHIELD", "MULTISHOT", "PIERCING"}; //add multishot, piercing, freeze?
     //specific powerup variables
-    private int multishot;
-    private int piercing;
-    private int freeze;
+    private static int multishot = 0;
+    private static int piercing = 0;
+    private static int freeze;
     
     public PowerUp(int x, int y) {
         super(x, y, 50, 50, 3);
@@ -44,6 +44,7 @@ public class PowerUp extends MovingThing {
     
     //static methods
     
+    //general methods
     public static boolean hasPowerUp(String pu) {
         return PowerUps.contains(pu);
     }
@@ -62,6 +63,11 @@ public class PowerUp extends MovingThing {
             case "SHIELD":
                 break;
             case "MULTISHOT":
+                initMultishot();
+                break;
+            case "PIERCING":
+                initPiercing();
+                break;
                 
         }
         
@@ -73,5 +79,25 @@ public class PowerUp extends MovingThing {
     
     public static void losePU(String pu) {
         PowerUps.remove(pu);
+    }
+    
+    //specific methods
+    public static void initMultishot() {
+        multishot = 10;
+    }
+    public static void useMultishot() {
+        multishot--;
+        if (multishot == 0) {
+            losePU("MULTISHOT");
+        }
+    }
+    public static void initPiercing() {
+        piercing = 10;
+    }
+    public static void usePiercing() {
+        piercing--;
+        if (piercing == 0) {
+            losePU("PIERCING");
+        }
     }
 }

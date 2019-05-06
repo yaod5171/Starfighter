@@ -128,7 +128,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
             graphToBack.setColor(Color.RED);
             graphToBack.drawString("GAME OVER", 500, 540);
         }
-
+        
         if (keys[0] == true) {
             ship.move("LEFT");
         }
@@ -146,7 +146,13 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
 
         if (keys[4] && !createdBullet) {
             shots.add(new Ammo(ship.getX() + ship.getWidth() / 2, ship.getY(), 5));
-            shotCount++;
+            if (PowerUp.hasPowerUp("MULTISHOT")) {
+                shots.add(new Ammo(ship.getX() + ship.getWidth() / 2, ship.getY(), 5, 100));
+                shots.add(new Ammo(ship.getX() + ship.getWidth() / 2, ship.getY(), 5, 80));
+                PowerUp.useMultishot();
+            }
+            
+            shotCount++; //note: 1 multi-shot counts as 1 shot creating 3 ammo
             createdBullet = true;
         }
 

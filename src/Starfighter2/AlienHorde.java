@@ -17,7 +17,7 @@ public class AlienHorde {
     private List<Alien> aliens;
 
     private int killCount;
-    
+
     private List<PowerUp> pu;
 
     public AlienHorde(int size) {
@@ -29,7 +29,7 @@ public class AlienHorde {
     public void add(Alien al) {
         aliens.add(al);
     }
-    
+
     public void remove(Alien al) {
         aliens.remove(al);
     }
@@ -62,21 +62,21 @@ public class AlienHorde {
                         pu.add(new PowerUp(b.getX(), b.getY()));
                     }
                     aliens.remove(i);
-                    b.setY(-200);
+                    if (!b.isPiercing()) {
+                        b.setY(-200);
+                    }
                     killCount++;
-                    
+
                     break;
                 }
             }
         }
     }
-    
-    
 
     public int getKillCount() {
         return killCount;
     }
-    
+
     public int aliensLeft() {
         return aliens.size();
     }
@@ -84,12 +84,13 @@ public class AlienHorde {
     public List<Alien> getList() {
         return aliens;
     }
-    
+
     public List<PowerUp> getPowerups() {
         List<PowerUp> out = pu;
         pu = new ArrayList();
         return out;
     }
+
     public String toString() {
         return "";
     }
