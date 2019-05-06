@@ -97,6 +97,9 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
 
         graphToBack.setColor(Color.BLACK);
         graphToBack.fillRect(0, 0, 800, 600);
+        
+        graphToBack.setColor(Color.RED);
+        graphToBack.drawLine(0, 500, 800, 500);
         /*
          graphToBack.setColor(Color.BLUE);
          graphToBack.drawString("StarFighter ", 25, 50);
@@ -107,9 +110,9 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
             //check if ship has hit an alien
             if (ship.collide(a)) {
                 //does the shield save its life?
-                if (PowerUp.powerup().equals("SHIELD")) {
+                if (PowerUp.hasPowerUp("SHIELD")) {
                     horde.remove(a);
-                    PowerUp.losePU();
+                    PowerUp.losePU("SHIELD");
                 } else {
                     gameOver = true;
                 }

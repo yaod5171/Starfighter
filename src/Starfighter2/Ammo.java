@@ -11,7 +11,8 @@ import javax.imageio.ImageIO;
 
 public class Ammo extends MovingThing {
 
-
+    private int dir;
+    
     public Ammo() {
         this(0, 0, 0);
     }
@@ -25,7 +26,19 @@ public class Ammo extends MovingThing {
     }
 
     public Ammo(int x, int y, int w, int h, int s) {
+        this(x, y, w, h, s, 90);
+    }
+    
+    public Ammo(int x, int y, int w, int h, int s, int d) {
         super(x, y, w, h, s);
+        dir = d;
+    }
+    
+    public int getDir() {
+        return dir;
+    }
+    public void setDir(int d) {
+        dir = d;
     }
 
     public void draw(Graphics window) {

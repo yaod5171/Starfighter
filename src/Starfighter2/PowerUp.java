@@ -1,5 +1,7 @@
 package Starfighter2;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.imageio.ImageIO;
@@ -13,10 +15,15 @@ import java.util.Random;
 public class PowerUp extends MovingThing {
     //instance variables
     private Image image;
+    
     //static variables
-    private static boolean hasPowerUp = false;
-    private static String PowerUp = "";
-    private final static String[] POWERUPS = {"SHIELD"};
+    //general powerup variables
+    private static List<String> PowerUps = new ArrayList();
+    private final static String[] POWERUPS = {"SHIELD"}; //add multishot, piercing, freeze?
+    //specific powerup variables
+    private int multishot;
+    private int piercing;
+    private int freeze;
     
     public PowerUp(int x, int y) {
         super(x, y, 50, 50, 3);
@@ -36,20 +43,35 @@ public class PowerUp extends MovingThing {
     }
     
     //static methods
-    public static boolean has() {
-        return hasPowerUp;
-    }
-    public static String powerup() {
-        return PowerUp;
+    
+    public static boolean hasPowerUp(String pu) {
+        return PowerUps.contains(pu);
     }
     
-    public static void getPU() {
-        hasPowerUp = true;
-        PowerUp = POWERUPS[(int) (Math.random() * POWERUPS.length)];
-        
+    public static List<String> powerups() {
+        return PowerUps;
     }
-    public static void losePU() {
-        hasPowerUp = false;
-        PowerUp = "";
+    
+    public static String getPU() {
+        String pu = POWERUPS[(int) (Math.random() * POWERUPS.length)];
+        if (!hasPowerUp(pu)) {
+            getPU(pu);
+        }
+        //other setup:
+        switch(pu) {
+            case "SHIELD":
+                break;
+            case "MULTISHOT":
+                
+        }
+        
+        return pu;
+    }
+    public static void getPU(String pu) {
+        PowerUps.add(pu);
+    }
+    
+    public static void losePU(String pu) {
+        PowerUps.remove(pu);
     }
 }

@@ -42,7 +42,7 @@ public class Ship extends MovingThing {
 
 
     public void draw(Graphics window) {
-        if (PowerUp.powerup() == "SHIELD") {
+        if (PowerUp.hasPowerUp("SHIELD")) {
             window.drawImage(puShip, getX(), getY(), getWidth(), getHeight(), null);
         } else {
             window.drawImage(ship, getX(), getY(), getWidth(), getHeight(), null);

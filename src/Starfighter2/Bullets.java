@@ -34,7 +34,8 @@ public class Bullets {
 
     public void moveEmAll() {
         for (Ammo b : ammo) {
-            b.setY(b.getY() - b.getSpeed());
+            b.move(b.getDir());
+            //b.setY(b.getY() - b.getSpeed());
         }
     }
 

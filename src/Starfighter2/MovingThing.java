@@ -150,8 +150,9 @@ public abstract class MovingThing implements Moveable {
     }
     
     public void move(int degrees) {
-        double vx = getExactSpeed() * Math.cos(degrees);
-        double vy = getExactSpeed() * Math.sin(degrees) * -1;
+        double radians = Math.toRadians(degrees);
+        double vx = getExactSpeed() * Math.cos(radians);
+        double vy = getExactSpeed() * Math.sin(radians) * -1;
         
         setX(getExactX() + vx);
         setY(getExactY() + vy);
