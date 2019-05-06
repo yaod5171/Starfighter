@@ -34,8 +34,13 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
 
     private int shotCount;
 
-    private final int TIMER = 500;
-    private int timer;
+    private final int LEVELTIMER = 500;
+    private int levelTimer;
+    
+    private boolean showGetPU;
+    private int showGetPUTimer;
+    private final int PUTIMER = 500;
+    private String newPU;
 
     public OuterSpace() {
         setBackground(Color.black);
@@ -55,14 +60,17 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
         createdBullet = false;
         shotCount = 0;
 
-        timer = TIMER;
+        levelTimer = LEVELTIMER;
+        
+        showGetPU = false;
+        showGetPUTimer = PUTIMER;
 
         this.addKeyListener(this);
         new Thread(this).start();
 
         setVisible(true);
     }
-
+    
     public void startHorde() {
         horde = new AlienHorde(50);
         for (int i = 0; i < 50; i++) {
@@ -179,8 +187,9 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
 
             //powerup collision detection
             if (ship.collide(pu)) {
-                PowerUp.getPU();
+                newPU = PowerUp.getPU();
                 pu.setY(getHeight() + 100);
+                showGetPU = true;
             }
 
             //clean up
@@ -192,23 +201,36 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
 
         //are all aliens defeated?
         if (horde.getList().size() == 0) {
-            timer--;
-            if (timer == 0) {
+            levelTimer--;
+            if (levelTimer == 0) {
                 level++;
                 newHorde();
-                timer = TIMER;
+                levelTimer = LEVELTIMER;
             }
         }
 
         //draw counts
         graphToBack.setColor(Color.YELLOW);
-        graphToBack.drawString("Aliens destroyed: " + ((level) * 50 - horde.aliensLeft()), 500, 500);
-        graphToBack.drawString("Shots fired: " + shotCount, 500, 520);
+        graphToBack.drawString("Aliens destroyed: " + ((level) * 50 - horde.aliensLeft()), 550, 520);
+        graphToBack.drawString("Shots fired: " + shotCount, 550, 540);
+        //draw powerups
+        graphToBack.drawString("Powerups:", 50, 520);
+        graphToBack.drawString("Multishot: " + PowerUp.getMultishot(), 50, 540);
+        graphToBack.drawString("Piercing Shot: " + PowerUp.getPiercing(), 50, 560);
         //draw level
-        graphToBack.drawString("Level " + level, 50, 520);
+        graphToBack.drawString("Level " + level, 50, 70);
         //draw label
         graphToBack.setColor(Color.BLUE);
-        graphToBack.drawString("STARFIGHTER 2", 50, 500);
+        graphToBack.drawString("STARFIGHTER 2", 50, 50);
+        //process and draw new powerup
+        if (showGetPU) {
+            graphToBack.drawString("New Powerup: " + newPU, 250, 540);
+            showGetPUTimer--;
+            if (showGetPUTimer == 0) {
+                showGetPU = false;
+                showGetPUTimer = PUTIMER;
+            }
+        }
         
         
         twoDGraph.drawImage(back, null, 0, 0);

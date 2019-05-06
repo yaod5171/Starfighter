@@ -26,7 +26,7 @@ public class PowerUp extends MovingThing {
     private static int freeze;
     
     public PowerUp(int x, int y) {
-        super(x, y, 50, 50, 3);
+        super(x, y, 50, 50, 2);
         try {
             URL url = getClass().getResource("images/pu.jpg");
             image = ImageIO.read(url);
@@ -85,6 +85,9 @@ public class PowerUp extends MovingThing {
     public static void initMultishot() {
         multishot = 10;
     }
+    public static int getMultishot() {
+        return multishot;
+    }
     public static void useMultishot() {
         multishot--;
         if (multishot == 0) {
@@ -93,6 +96,9 @@ public class PowerUp extends MovingThing {
     }
     public static void initPiercing() {
         piercing = 10;
+    }
+    public static int getPiercing() {
+        return piercing;
     }
     public static void usePiercing() {
         piercing--;

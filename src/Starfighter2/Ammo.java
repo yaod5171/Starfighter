@@ -39,7 +39,10 @@ public class Ammo extends MovingThing {
         dir = d;
         if (PowerUp.hasPowerUp("PIERCING")) {
             piercing = true;
-            PowerUp.usePiercing();
+            // quick patch to make multishot only use one charge
+            if (d == 90) {
+                PowerUp.usePiercing();
+            }
         } else {
             piercing = false;
         }
